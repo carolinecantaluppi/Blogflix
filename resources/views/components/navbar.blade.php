@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Blog Serie</a>
+        <a class="navbar-brand" href="#">Blogflix</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,6 +27,11 @@
                         </ul>
                     </li>    
                 </ul>
+                {{-- Show/Hide Button --}}
+                <div class="btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <button type="submit" id="showHideButton" class="btn btn-outline-dark" for="btnradio1">Inserisci</button>                
+                </div>
                 @else      
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('register')}}">Registrati</a>
