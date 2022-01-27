@@ -11281,6 +11281,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-
-
+.card-border{
+    border: 2em;
+    border-radius: 2em;
+}
 

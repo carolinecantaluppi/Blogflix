@@ -18,6 +18,7 @@ class PrivateController extends Controller
             'body'=>$request->input('body'),
             'category'=>$request->input('category'),
             'authorname'=>$request->input('authorname')
+            // 'user_id'=>Auth::id()
         ]);
 
         return redirect(route('home'));
@@ -28,38 +29,36 @@ class PrivateController extends Controller
         return view('movie.update', compact('movie'));
     }
 
-    // Register:
-    public function register(Request $request)
-    {
-        $register = User::create([
-            'name'=>$request->input('name'),
-            'email'=>$request->input('email'),
-            'password'=>$request->input('password'),
-            'password_confirmation'=>$request->input('password_confirmation')
-        ]);
+    // // Register:
+    // public function register(Request $request)
+    // {
+    //     $register = User::create([
+    //         'name'=>$request->input('name'),
+    //         'email'=>$request->input('email'),
+    //         'password'=>$request->input('password'),
+    //         'password_confirmation'=>$request->input('password_confirmation')
+    //     ]);
 
-        return redirect(route('home'));
-    }
+    //     return redirect(route('home'));
+    // }
 
-    // Login:
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+    // // Login:
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
+    //     ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    //     if (Auth::attempt($credentials)) {
+    //         $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
-        }
+    //         return redirect()->intended('dashboard');
+    //     }
 
-        return back()->withErrors([
-            'email' => 'Le credenziali fornite non corrispondono ai nostri record.',
-        ]);
-        
-        return redirect(route('home'));
-    }
+    //     return back()->withErrors([
+    //         'email' => 'Le credenziali fornite non corrispondono ai nostri record.',
+    //     ]);
+    // }
 
 }

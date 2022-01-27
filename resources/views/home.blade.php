@@ -53,44 +53,85 @@
                         <label for="exampleInputEmail1" class="form-label">Nome dell'Autore</label>
                         <input name="authorname" type="text" class="form-control">  
                     </div>
-                    <div class=" mt-5 col-4 mx-auto">
-                        <button type="submit" class="btn btn-dark">Invia</button>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-dark" type="submit">Invia</button>
                     </div>
                 </form>
             </div>
         </div>
-       
+
+        {{-- Carousel --}}
+        {{-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            @forelse($movie as $movie)
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{Storage::url($movie['img'])}}" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            @empty
+                <h2 style="text-align: center">...</h2>
+            @endforelse
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div> --}}
+
         {{-- Card --}}
         <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-8">
-                    @forelse($movie as $movie)
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="card mt-5">  {{-- style="width: 18rem --}}
-                            <img src="{{Storage::url($movie->img)}}" class="card-img-top" alt="...">   
-                            <div class="card-body">
-                                <h5 class="card-title">{{$movie['title']}}</h5>  
-                                <p class="card-text">{{$movie['body']}}</p>
-                                <h6>{{$movie['category']}}</h6>
-                                <h6>{{$movie['authorname']}}</h6>  
-                                <div class="btn-group btn-group-sm col-4 mx-auto">
-                                    <a href="{{route('moviedetail', ['key'=>$loop->index])}}" class="btn btn-dark mx-auto">Dettaglio</a>
-                                </div>
-                                {{-- <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                                <button type="submit" id="showHideButton" class="btn btn-outline-dark" for="btnradio2">Modifica</button>
-                            
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                                <button type="submit" id="showHideButton" class="btn btn-outline-dark" for="btnradio3">Elimina</button> --}}
-
+                @forelse($movie as $movie)
+                <div class="col-lg-6 col-sm-6">
+                    <div class="card h-100 mt-5 card-border">  {{-- style="width: 18rem --}}
+                        <img src="{{Storage::url($movie['img'])}}" class="" alt="...">   
+                        <div class="card-body">
+                            <h5 class="card-title">{{$movie['title']}}</h5>  
+                            <p class="card-text">{{$movie['body']}}</p>
+                            <h6>{{$movie['category']}}</h6>
+                            <h6>{{$movie['authorname']}}</h6>  
+                            <div class="btn-group btn-group-sm col-6 mx-auto">
+                                <a href="{{route('moviedetail', ['key'=>$loop->index])}}" class="btn btn-dark mx-auto">Dettaglio</a>
                             </div>
+                            {{-- <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                            <button type="submit" id="showHideButton" class="btn btn-outline-dark" for="btnradio2">Modifica</button>
+                        
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                            <button type="submit" id="showHideButton" class="btn btn-outline-dark" for="btnradio3">Elimina</button> --}}
                         </div>
-                    </div>  
-                    @empty
-                    <h2 style="text-align: center">Non ci sono film.</h2>
-                    @endforelse
-                </div>
+                        {{-- <div class="card-footer">
+                            <small class="text-muted">Last updated...</small>
+                        </div> --}}
+                    </div>
+                </div>  
+                @empty
+                <h2 style="text-align: center">Non ci sono film.</h2>
+                @endforelse
             </div>
         </div>
     </div>
+    
+    {{-- Pagination --}}
+    <nav class="mt-5" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+    </nav>
 
 </x-layout>

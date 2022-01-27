@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\PrivateController;
+use App\Providers\FortifyServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::group([], function () {
     Route::get('/home', [PublicController::class, 'home'])->name('home');    
     Route::get('/home/moviedetail', [PublicController::class, 'moviedetail'])->name('moviedetail');
     Route::post('/register', [PrivateController::class, 'register'])->name('register');
-    Route::post('/login', [PrivateController::class, 'login'])->name('login');
+    // Route::post('/login', [PrivateController::class, 'login'])->name('login');
 });
 
 // Route autenticati tramite login

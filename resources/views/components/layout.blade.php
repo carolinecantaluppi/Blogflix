@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <title>{{$title}}</title>
 </head>
-<body>
+<body style="background-color: whitesmoke">
     
     <x-navbar/>
 
