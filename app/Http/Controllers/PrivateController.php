@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class PrivateController extends Controller
 {
     // Movie:
+    public function movieview(Request $request)
+    {
+        return view('movies/moviecreate');
+    }
+
     public function movieCreate(Request $request)
     {
         $movie = Movie::create([
@@ -26,7 +31,8 @@ class PrivateController extends Controller
 
     public function update(Movie $movie)
     {
-        return view('movie.update', compact('movie'));
+        return view('movieupdate', compact('movie'));
+        // return redirect()->route('movieupdate', ['movie' => $forms]);
     }
 
     // // Register:

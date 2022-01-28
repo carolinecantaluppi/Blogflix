@@ -20,12 +20,13 @@ use App\Providers\FortifyServiceProvider;
 Route::group([], function () {
     Route::get('/home', [PublicController::class, 'home'])->name('home');    
     Route::get('/home/moviedetail', [PublicController::class, 'moviedetail'])->name('moviedetail');
-    Route::post('/register', [PrivateController::class, 'register'])->name('register');
+    // Route::post('/register', [PrivateController::class, 'register'])->name('register');
     // Route::post('/login', [PrivateController::class, 'login'])->name('login');
 });
 
 // Route autenticati tramite login
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/home/update/{movie}', [PrivateController::class, 'update'])->name('movie.update');   
-    Route::post('/home/submit', [PrivateController::class, 'movieCreate'])->name('moviecreate'); 
+    Route::post('/home/update/{movie}', [PrivateController::class, 'update'])->name('movieupdate');   
+    Route::get('/home/create', [PrivateController::class, 'movieview'])->name('movieview'); 
+    Route::post('/home/create', [PrivateController::class, 'movieCreate'])->name('moviecreate'); 
 });

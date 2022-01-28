@@ -1,6 +1,11 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid offset-md-6">
+      <a class="navbar-brand" href="{{route('home')}}"><h3>Blogflix</h3></a>
+    </div>
+</nav>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Blogflix</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,11 +20,11 @@
                         {{Auth::user()->name}}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Inserisci Film</a></li>
+                        <li><a class="dropdown-item" href="#">I miei Film</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault()
-                                document.getElementById('logout').submit()">Logout</a>
+                                // document.getElementById('logout').moviecreate()">Logout</a>
                             </li>
                             <form method="POST" action="{{route('logout')}}" id="logout">
                                 @csrf
@@ -28,10 +33,11 @@
                     </li>    
                 </ul>
                 {{-- Show/Hide Button --}}
-                <div class="btn-group-sm" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                    <button type="submit" id="showHideButton" class="btn btn-outline-dark" for="btnradio1">Inserisci</button>                
-                </div>
+                <ul class="nav nav-pills justify-content-end">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="{{route('moviecreate')}}">Inserire film</a>
+                    </li>
+                </ul>
                 @else      
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('register')}}">Registrati</a>

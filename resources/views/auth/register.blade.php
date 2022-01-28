@@ -4,7 +4,7 @@
         {{-- Title --}}
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3 text-center">
-                <h1>Registrati</h1>
+                <h3>Per favore registrati</h3>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
     
         {{-- Form --}}
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
+            <div class="col-6 col-md-3">
                 <form method="POST" action="{{route("register")}}">
                     @csrf       
                     <div class="mb-3 mt-5">
@@ -43,7 +43,7 @@
                         <input type="password" class="form-control" name="password_confirmation">
                     </div>
                     <div class=" mt-5 mx-auto">
-                        <button type="submit" class="btn btn-primary">Registrati</button>
+                        <button type="submit" class="w-100 btn btn-md btn-dark mt-3">Registrati</button>
                     </div>
                 </form>
             </div>

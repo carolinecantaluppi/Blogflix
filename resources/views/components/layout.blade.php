@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- CSS --}}
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <title>{{$title}}</title>
+    <title>Blogflix</title>
 </head>
 <body style="background-color: whitesmoke">
     
