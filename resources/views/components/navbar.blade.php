@@ -1,9 +1,3 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid offset-md-6">
-      <a class="navbar-brand" href="{{route('home')}}"><h3>Blogflix</h3></a>
-    </div>
-</nav>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +17,9 @@
                         <li><a class="dropdown-item" href="#">I miei Film</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#" onclick="event.preventDefault()
-                                // document.getElementById('logout').moviecreate()">Logout</a>
+                            <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                             </li>
-                            <form method="POST" action="{{route('logout')}}" id="logout">
+                            <form method="POST" action="{{route('logout')}}" id="logout-form">
                                 @csrf
                             </form>
                         </ul>
@@ -46,6 +39,7 @@
                     <a class="nav-link" href="{{route('login')}}">Login</a>
                 </li>
                 @endauth
-            </div>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>

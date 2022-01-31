@@ -17,6 +17,6 @@ class PublicController extends Controller
     public function moviedetail()
     {
         $movie = Movie::all();
-        return view('moviedetail', compact('movie'));
+        return view('movies/moviedetail', compact('movie'));
     }
 }

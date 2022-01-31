@@ -35,36 +35,4 @@ class PrivateController extends Controller
         // return redirect()->route('movieupdate', ['movie' => $forms]);
     }
 
-    // // Register:
-    // public function register(Request $request)
-    // {
-    //     $register = User::create([
-    //         'name'=>$request->input('name'),
-    //         'email'=>$request->input('email'),
-    //         'password'=>$request->input('password'),
-    //         'password_confirmation'=>$request->input('password_confirmation')
-    //     ]);
-
-    //     return redirect(route('home'));
-    // }
-
-    // // Login:
-    // public function login(Request $request)
-    // {
-    //     $credentials = $request->validate([
-    //         'email' => ['required', 'email'],
-    //         'password' => ['required'],
-    //     ]);
-
-    //     if (Auth::attempt($credentials)) {
-    //         $request->session()->regenerate();
-
-    //         return redirect()->intended('dashboard');
-    //     }
-
-    //     return back()->withErrors([
-    //         'email' => 'Le credenziali fornite non corrispondono ai nostri record.',
-    //     ]);
-    // }
-
 }
