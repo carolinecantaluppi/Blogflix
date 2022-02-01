@@ -9,7 +9,9 @@
   <title>Blogflix</title>
 </head>
 <body>
-    
+ 
+  <h2 class="mt-5 font-blog" style="text-align: center">Blogflix</h2>
+  
   <x-navbar/>
 
   {{$slot}}

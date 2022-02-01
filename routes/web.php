@@ -18,13 +18,17 @@ use App\Providers\FortifyServiceProvider;
 
 // Route pubblici che non richiedono il login
 Route::group([], function () {
+    Route::get('/', [PublicController::class, 'home']);    
     Route::get('/home', [PublicController::class, 'home'])->name('home');    
     Route::get('/home/moviedetail', [PublicController::class, 'moviedetail'])->name('moviedetail');
 });
 
 // Route autenticati tramite login
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/home/update/{movie}', [PrivateController::class, 'update'])->name('movieupdate');   
     Route::get('/home/create', [PrivateController::class, 'movieview'])->name('movieview'); 
     Route::post('/home/create', [PrivateController::class, 'movieCreate'])->name('moviecreate'); 
+    Route::get('/mymovies', [PrivateController::class, 'mymovies'])->name('mymovies');
+    Route::post('/mymovies/update/{movie}', [PrivateController::class, 'update'])->name('movieupdate');   
+    Route::post('/mymovies/edit/{movie}', [PrivateController::class, 'edit'])->name('movieedit');   
+    Route::post('/mymovies/delete/{movie}', [PrivateController::class, 'delete'])->name('moviedelete');   
 });

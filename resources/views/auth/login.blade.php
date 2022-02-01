@@ -1,4 +1,4 @@
-<x-layout title="Login">
+<x-layout>
     <div class="container mt-5 justify-content-center">
         
         {{-- Error messsage --}}

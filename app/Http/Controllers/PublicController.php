@@ -10,13 +10,13 @@ class PublicController extends Controller
 {
     // Home:
     function home() {
-        $movie = Movie::all();
-        return view('home', compact('movie'));
+        $movies = Movie::all();
+        return view('home', compact('movies'));
     }
     
-    public function moviedetail()
+    public function moviedetail(Request $request)
     {
-        $movie = Movie::all();
+        $movie = Movie::find($request->input('id'));
         return view('movies/moviedetail', compact('movie'));
     }
 }
