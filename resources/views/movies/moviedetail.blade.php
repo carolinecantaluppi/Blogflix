@@ -10,8 +10,7 @@
                     <h6 class="fst-italic">{{$movie['category']}}</h6>
                     <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
                     <p class="card-text fw-lighter lh-base">{{$movie['body']}}</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <p>{{$movie['user']['name']}}</p>
+                    <p class="card-text"><small class="text-muted">By: {{$movie['user']['name']}}</small></p>
                 </div>
             </div>
             <div class="btn btn-sm col-6 mx-auto" style="justify-content: end">

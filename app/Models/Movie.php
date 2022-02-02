@@ -14,6 +14,12 @@ class Movie extends Model
         'title',
         'body',
         'category',
-        'authorname'
+        'authorname',
+        'user_id'
     ];
+
+    // One to One, un movie ha un utente:
+    public function user(){
+        return $this->belongsTo(User::class);  
+    }  
 }

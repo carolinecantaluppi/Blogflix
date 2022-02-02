@@ -49,7 +49,7 @@
               <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
               <p class="card-text text-truncate fw-lighter lh-base">{{$movie['body']}}</p>
               <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-sm btn-dark justify-content-center">Leggi</a>
-              <p>{{$movie['user']['name']}}</p>
+              <p class="card-text mt-3"><small class="text-muted">By: {{$movie['user']['name']}}</small></p>
             </div>      
           </div>
         </div>

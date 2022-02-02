@@ -1,5 +1,18 @@
 <x-layout>
 
+  {{-- Error messsage --}}
+  <div class="row">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif  
+  </div>
+
   {{-- Show/Hide Button --}}
   <div class="container offset-md-2">
     <p>
@@ -15,39 +28,56 @@
             <form class="showform" method="POST" action="{{route('moviecreate')}}" enctype="multipart/form-data">
               @csrf       
               <div class="mb-3 mt-5">
-                  <label for="exampleInputText" class="form-label">Immagine</label>
-                  <input name="img" type="file" class="form-control">
+                <label for="exampleInputText" class="form-label">Immagine</label>
+                <input name="img" type="file" class="form-control">
               </div>
               <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Titolo</label>
-                  <input name="title" type="text" class="form-control">  
+                <label for="exampleInputEmail1" class="form-label">Titolo</label>
+                <input name="title" type="text" class="form-control">  
               </div>
               <div class="mb-3">
-                  <label for="exampleInputText" class="form-label">Descrizione</label>
-                  <textarea name="body" class="form-control" rows="3"></textarea>
+                <label for="exampleInputEmail1" class="form-label">Nome dell'Autore</label>
+                <input name="authorname" type="text" class="form-control">  
               </div>
               <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Categoria</label>
-                  <input name="category" type="text" class="form-control">  
-              </div>
-              {{-- <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Default checkbox
-                  </label>
+                <label for="exampleInputText" class="form-label">Descrizione</label>
+                <textarea name="body" class="form-control" rows="3"></textarea>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                  <label class="form-check-label" for="flexCheckChecked">
-                    Checked checkbox
-                  </label>
-              </div> --}}
-              <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Nome dell'Autore</label>
-                  <input name="authorname" type="text" class="form-control">  
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">Animazione</label>
               </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Avventura</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Azione</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Commedia</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Drammatico</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Fantascienza</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Mistero</label>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Altra Categoria</label>
+                <input name="category" type="text" class="form-control">  
+              </div>
+
               <div class="d-grid gap-2 col-6 mx-auto">
-                  <button class="btn btn-dark" type="submit">Invia</button>
+                <button class="btn btn-dark" type="submit">Invia</button>
               </div>
             </form>
           </div>
@@ -64,36 +94,37 @@
   <div class="container mt-5">
     <div class="row">
       @forelse($movies as $movie)
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card rounded shadow-sm border-0">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="{{Storage::url($movie['img'])}}" alt="series pictures" width="100%" height="300">
-              <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title fw-bolder" style="text-align: center">{{$movie['title']}}</h5>  
-              <h6 class="fst-italic">{{$movie['category']}}</h6>
-              <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
-              <p class="card-text text-truncate fw-lighter lh-base">{{$movie['body']}}</p>
-              <p>{{$movie['user']['name']}}</p>
-              <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-sm btn-dark justify-content-center">Leggi</a>
-              @if ($movie['user']['id'] === Auth::id())                            
+        @if ($movie['user']['id'] === Auth::id())                     
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card rounded shadow-sm border-0">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="{{Storage::url($movie['img'])}}" alt="series pictures" width="100%" height="300">
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title fw-bolder" style="text-align: center">{{$movie['title']}}</h5>  
+                <h6 class="fst-italic">{{$movie['category']}}</h6>
+                <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
+                <p class="card-text text-truncate fw-lighter lh-base">{{$movie['body']}}</p>
+                <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-sm btn-dark justify-content-center">Leggi</a>
                 <a href="{{route('movieupdate', compact('movie'))}}" class="btn btn-sm btn-warning">Modifica</a>
-                <form method="POST" action="{{route('moviedelete', compact('movie'))}}">
+                <a href="{{route('moviedelete', compact('movie'))}}" class="btn btn-sm btn-danger">Elimina</a>
+                
+                {{-- <form method="POST" action="{{route('moviedelete', compact('movie'))}}">
                   @csrf
                   @method('delete')
                   <button type="submit" class="btn btn-sm btn-danger">Elimina</button>
-                </form>
-              @endif
-            </div>      
+                </form> --}}
+                <p class="card-text mt-3"><small class="text-muted">{{$movie['user']['name']}}</small></p>
+              </div>      
+            </div>
           </div>
-        </div>
-        @empty
-        <h2 style="text-align: center">Non ci sono film.</h2>
+        @endif
+      @empty
+      <h2 style="text-align: center">Non ci sono film.</h2>
       @endforelse
     </div>
   </div>
-
 </x-layout>
