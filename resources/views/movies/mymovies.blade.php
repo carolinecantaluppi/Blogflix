@@ -12,6 +12,15 @@
         </div>
     @endif  
   </div>
+  
+  <div class="row">
+    @if (session('message'))
+      <div class="alert alert-success">
+        {{ session('message') }}
+      </div>
+    @endif
+  </div>
+  
 
   {{-- Show/Hide Button --}}
   <div class="container offset-md-2">
@@ -71,8 +80,10 @@
                 <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
                 <label class="form-check-label" for="flexCheckChecked">Mistero</label>
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Altra Categoria</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Altra Categoria</label>
+                <label for="exampleInputEmail1" class="form-label"></label>
                 <input name="category" type="text" class="form-control">  
               </div>
 
@@ -96,7 +107,7 @@
       @forelse($movies as $movie)
         @if ($movie['user']['id'] === Auth::id())                     
           <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card rounded shadow-sm border-0">
+            <div class="card card-edit rounded shadow-sm border-0">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                 <img src="{{Storage::url($movie['img'])}}" alt="series pictures" width="100%" height="300">
                 <a href="#!">
@@ -109,15 +120,18 @@
                 <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
                 <p class="card-text text-truncate fw-lighter lh-base">{{$movie['body']}}</p>
                 <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-sm btn-dark justify-content-center">Leggi</a>
-                <a href="{{route('movieupdate', compact('movie'))}}" class="btn btn-sm btn-warning">Modifica</a>
-                <a href="{{route('moviedelete', compact('movie'))}}" class="btn btn-sm btn-danger">Elimina</a>
-                
-                {{-- <form method="POST" action="{{route('moviedelete', compact('movie'))}}">
-                  @csrf
-                  @method('delete')
-                  <button type="submit" class="btn btn-sm btn-danger">Elimina</button>
-                </form> --}}
-                <p class="card-text mt-3"><small class="text-muted">{{$movie['user']['name']}}</small></p>
+                {{-- <a href="{{route('movieupdate', ['id'=>$movie['id']])}}" class="btn btn-sm btn-warning">Modifica</a> --}}
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <form method="POST" action="{{route('movieedit', ['id'=>$movie['id']])}}">
+                    @csrf
+                    <button type="submit" class="btn btn-group btn-sm btn-warning">Modifica</button>
+                  </form>
+                  <form method="POST" action="{{route('moviedelete', ["id"=>$movie['id']])}}">
+                    @csrf
+                    <button type="submit" class="btn btn-group btn-sm btn-danger">Elimina</button>
+                  </form>
+                </div>
+                <p class="card-text mt-3"><small class="text-muted">Da: {{$movie['user']['name']}}, {{$movie->created_at->format('d/m/Y H:m')}}</small></p>  
               </div>      
             </div>
           </div>

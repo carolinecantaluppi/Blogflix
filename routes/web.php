@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home/create', [PrivateController::class, 'movieview'])->name('movieview'); 
     Route::post('/home/create', [PrivateController::class, 'movieCreate'])->name('moviecreate'); 
     Route::get('/mymovies', [PrivateController::class, 'mymovies'])->name('mymovies');
-    Route::post('/mymovies/update/{movie}', [PrivateController::class, 'update'])->name('movieupdate');   
-    Route::post('/mymovies/edit/{movie}', [PrivateController::class, 'edit'])->name('movieedit');   
-    Route::post('/mymovies/delete/{movie}', [PrivateController::class, 'delete'])->name('moviedelete');   
+    Route::post('/mymovies/update/{id}', [PrivateController::class, 'update'])->name('movieupdate');   
+    Route::post('/mymovies/edit/{id}', [PrivateController::class, 'edit'])->name('movieedit');   
+    Route::post('/mymovies/delete/{id}', [PrivateController::class, 'delete'])->name('moviedelete');   
 });

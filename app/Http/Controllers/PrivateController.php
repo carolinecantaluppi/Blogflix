@@ -26,26 +26,25 @@ class PrivateController extends Controller
             'user_id'=>Auth::id()
         ]);
 
-        return redirect(route('home'));
+        return redirect(route('home'))->with('message', 'Il tuo film è stato aggiunto.');
     }
 
-    public function update(Movie $movie)
-    {
-        return view('movies/movieupdate', compact('movie'));
-        // return redirect()->route('movieupdate', ['movie' => $forms]);
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     $movie = Movie::update($id);
+    //     return redirect(route('mymovies'));
+    // }
 
     public function mymovies()
     {
-        // dd($movie);
         $movies = Movie::all();
         return view('movies/mymovies', compact('movies'));
     }
 
     public function edit(Movie $movie, Request $request)
     {
-        if ($movie->user->id === Auth::id()) {
-            
+        if ($movie['id'] === Auth::id()) {
+
             if ($request->file('img')) {
                 
                 $movie->update([
@@ -59,19 +58,18 @@ class PrivateController extends Controller
                 $movie->update([
                     'title'=>$request->input('title'), 
                     'body'=>$request->input('body'),
+                    'category'=>$request->input('category'),
+                    'authorname'=>$request->input('authorname')
                 ]);
-            }
-        }
+            };
+        };
+        return view('movies/movieupdate', compact($movie));
     }
 
-    public function delete(Movie $movie)
+    public function delete(Request $request, $id)
     {
-        if ($movie->user->id === Auth::id()) {
+        $movie = Movie::destroy($id);
 
-            // * per elliminare questi dati dall database: *
-            $movie->delete();
-        }
-
-        return view('movies/mymovies', compact('movies'));
+        return redirect(route('mymovies'));
     }
 }

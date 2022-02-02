@@ -14,7 +14,7 @@ class PublicController extends Controller
         return view('home', compact('movies'));
     }
     
-    public function moviedetail(Request $request)
+    public function moviedetail(Request $request, $id)
     {
         $movie = Movie::find($request->input('id'));
         return view('movies/moviedetail', compact('movie'));
