@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use App\Http\Requests\MovieRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\MovieRequestEdit;
+use App\Http\Requests\MovieRequestCreate;
 
 class PrivateController extends Controller
 {
@@ -15,7 +18,7 @@ class PrivateController extends Controller
         return view('movies/moviecreate');
     }
 
-    public function movieCreate(Request $request)
+    public function movieCreate(MovieRequestCreate $request)
     {
         $movie = Movie::create([
             'img'=>$request->file('img')->store('public/img'),      // php artisan storage:link -> usare su terminale per collegare la cartella storage e salvare.
@@ -42,7 +45,7 @@ class PrivateController extends Controller
         return view('movies/mymovies', compact('movies', 'selectedmovie'));
     }
 
-    public function edit(Movie $movie, Request $request)
+    public function edit(Movie $movie, MovieRequestEdit $request)
     {
         if ($movie['id'] === Auth::id()) {
 
@@ -64,7 +67,7 @@ class PrivateController extends Controller
                 ]);
             };
         };
-        return redirect('movies/mymovies');
+        return redirect(route('mymovies'));
     }
 
     public function delete(Request $request, $id)

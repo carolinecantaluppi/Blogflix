@@ -48,7 +48,7 @@
               <h6 class="fst-italic">{{$movie['category']}}</h6>
               <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
               <p class="card-text text-truncate fw-lighter lh-base">{{$movie['body']}}</p>
-              <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-sm btn-dark justify-content-center">Leggi</a>
+              <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-card btn-sm btn-dark justify-content-center">Leggi</a>
               <p class="card-text mt-3"><small class="text-muted">Da: {{$movie['user']['name']}}, {{$movie->created_at->format('d/m/Y H:m')}}</small></p>
             </div>      
           </div>
