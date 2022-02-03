@@ -35,10 +35,11 @@ class PrivateController extends Controller
     //     return redirect(route('mymovies'));
     // }
 
-    public function mymovies()
+    public function mymovies(Request $request, Movie $movie)
     {
         $movies = Movie::all();
-        return view('movies/mymovies', compact('movies'));
+        $selectedmovie = $movie;
+        return view('movies/mymovies', compact('movies', 'selectedmovie'));
     }
 
     public function edit(Movie $movie, Request $request)
@@ -63,7 +64,7 @@ class PrivateController extends Controller
                 ]);
             };
         };
-        return view('movies/movieupdate', compact($movie));
+        return redirect('movies/mymovies');
     }
 
     public function delete(Request $request, $id)

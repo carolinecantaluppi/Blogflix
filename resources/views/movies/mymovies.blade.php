@@ -29,12 +29,12 @@
         Inserire film
       </button>
     </p>
-    <div class="collapse" id="collapseExample">
+    <div class="collapse {{(isset($selectedmovie->id)) ? 'show' : ''}}" id="collapseExample">
       <div class="card card-body shadow-lg p-3 mb-5 bg-body rounded" style="width: 50rem; justify-content: center">
         {{-- Form --}}
         <div class="row justify-content-center">
           <div class="col-12 col-md-6">
-            <form class="showform" method="POST" action="{{route('moviecreate')}}" enctype="multipart/form-data">
+            <form class="showform" method="POST" action="{{ (isset($selectedmovie->id)) ? route('movieedit', ['id'=>$selectedmovie['id']]) : route('moviecreate') }}" enctype="multipart/form-data">
               @csrf       
               <div class="mb-3 mt-5">
                 <label for="exampleInputText" class="form-label">Immagine</label>
@@ -42,52 +42,51 @@
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Titolo</label>
-                <input name="title" type="text" class="form-control">  
+                <input name="title" value="{{$selectedmovie->title ?? ''}}" type="text" class="form-control">  
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nome dell'Autore</label>
-                <input name="authorname" type="text" class="form-control">  
+                <input name="authorname" value="{{$selectedmovie->authorname ?? ''}}" type="text" class="form-control">  
               </div>
               <div class="mb-3">
                 <label for="exampleInputText" class="form-label">Descrizione</label>
-                <textarea name="body" class="form-control" rows="3"></textarea>
+                <textarea name="body" value="" class="form-control" rows="3">{{$selectedmovie->body ?? ''}}</textarea>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckDefault">
+                <input class="form-check-input" value="{{$selectedmovie->Animazione ?? ''}}" type="checkbox" name="Animazione">
                 <label class="form-check-label" for="flexCheckDefault">Animazione</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->Avventura ?? ''}}" type="checkbox" name="Avventura">
                 <label class="form-check-label" for="flexCheckChecked">Avventura</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->Azione ?? ''}}" type="checkbox" name="Azione">
                 <label class="form-check-label" for="flexCheckChecked">Azione</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->Commedia ?? ''}}" type="checkbox" name="Commedia">
                 <label class="form-check-label" for="flexCheckChecked">Commedia</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->Drammatico ?? ''}}" type="checkbox" name="Drammatico">
                 <label class="form-check-label" for="flexCheckChecked">Drammatico</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->Fantascienza ?? ''}}" type="checkbox" name="Fantascienza">
                 <label class="form-check-label" for="flexCheckChecked">Fantascienza</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->Mistero ?? ''}}" type="checkbox" name="Mistero">
                 <label class="form-check-label" for="flexCheckChecked">Mistero</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category" id="flexCheckChecked">
+                <input class="form-check-input" value="{{$selectedmovie->AltraCategoria ?? ''}}" type="checkbox" name="category">
                 <label class="form-check-label" for="flexCheckChecked">Altra Categoria</label>
                 <label for="exampleInputEmail1" class="form-label"></label>
-                <input name="category" type="text" class="form-control">  
+                <input name="category" value="{{$selectedmovie->category ?? ''}}" type="text" class="form-control">  
               </div>
-
-              <div class="d-grid gap-2 col-6 mx-auto">
+              <div class="d-grid gap-2 col-6 mx-auto mt-3">
                 <button class="btn btn-dark" type="submit">Invia</button>
               </div>
             </form>
@@ -120,12 +119,9 @@
                 <h6 class="fst-italic">{{$movie['authorname']}}</h6>  
                 <p class="card-text text-truncate fw-lighter lh-base">{{$movie['body']}}</p>
                 <a href="{{route('moviedetail', ['id'=>$movie['id']])}}" class="btn btn-sm btn-dark justify-content-center">Leggi</a>
+                <a href="{{route('mymovies', ['movie'=>$movie['id']])}}" class="btn btn-sm btn-warning justify-content-center">Modifica</a>
                 {{-- <a href="{{route('movieupdate', ['id'=>$movie['id']])}}" class="btn btn-sm btn-warning">Modifica</a> --}}
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                  <form method="POST" action="{{route('movieedit', ['id'=>$movie['id']])}}">
-                    @csrf
-                    <button type="submit" class="btn btn-group btn-sm btn-warning">Modifica</button>
-                  </form>
                   <form method="POST" action="{{route('moviedelete', ["id"=>$movie['id']])}}">
                     @csrf
                     <button type="submit" class="btn btn-group btn-sm btn-danger">Elimina</button>
