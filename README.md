@@ -37,7 +37,7 @@ To set up the project locally, follow these steps:
 5. **Run Migrations: Set up the database tables:**
     php artisan migrate
 
-6. **Serve the Application: Start the development server:**
+6. **Start the development server:**
     php artisan serve
 
 7. **The application will be accessible at:**
